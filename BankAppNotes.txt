@@ -1,0 +1,46 @@
+                BANK APP 
+           -------------------
+
+    1. Create a new project - ng new bankapp-frontend
+    2. cd bankapp-frontend
+    3. code .
+    4. Run the project - ng s --o 
+    5. Clear the code in app.component
+    6. Install 3rd party libraries
+            (1) Bootstrap - copy and paste Bootstrap link in index.html
+            (2) fontawsome - copy and paste cdnjs link in index.html
+            (3) google fonts - copy and paste google fonts link  in style.css 
+    7. Create Components 
+        -> Register - ng g c register 
+        -> Login - ng g c login 
+        -> Dashboard - ng g c dashboard
+        -> Transaction - ng g c transaction
+        ->PageNotFound - ng g c pageNotFound   
+   8. Path setup
+        setup path for each component in app-routing.model.ts 
+   9.Use router-outlet tag in app.component.html 
+   10. Page Designing         
+
+   11.Reactive Forms
+          Reactive forms provide a model-driven approach to handling form inputs whose values change over time. This guide shows you how to create and update a basic form control, 
+          progress to using multiple controls in a group, validate form values, and create dynamic forms where you can add or remove controls at run time.
+
+         --> app.module.ts
+                 import { ReactiveFormsModule } from '@angular/forms';
+
+                    @NgModule({
+                          imports: [
+                         // other imports ...
+                          ReactiveFormsModule
+                          ],
+                         })
+          
+          -->FormGroup -ts
+          -->FormArray -ts
+          -->Formcontrol -hmtl
+         
+          -->Form Builder
+          The FormBuilder provides syntactic sugar that shortens creating instances of a FormControl,
+           FormGroup, or FormArray. It reduces the amount of boilerplate needed to build complex forms.
+
+          

@@ -1,0 +1,73 @@
+<!-- navbar -->
+<nav class="navbar bg-info">
+    <div class="container">
+      <a class="navbar-brand" >
+      <img width="50px" height="50px" src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-currency-exchange-money-icon-design-for-web-png-image_5225655.jpg" alt="">
+      WEST COAST BANK
+      </a>
+    </div>
+  </nav>
+  <!-- register landing page -->
+<div *ngIf="RegisterSucess" class="container text-center mt-5 p-5">
+  <h1>Yout data is registering...please wait
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  </h1>
+</div>
+
+  <!-- register form -->
+  <div *ngIf="!RegisterSucess" class="container">
+    <div class="row">
+    <div class="col-6">
+      <img width="100%" height="600px" src="https://img.indiafilings.com/learn/wp-content/uploads/2021/10/12003512/current-bank-account.png" alt="">
+    </div>
+    <div class="col-6 mt-5">
+      <!-- login form -->
+      <form (ngSubmit)="register()" [formGroup]="registerForm" class="mt-2 mb-5 border border-info p-5 rounded shadow">
+        <h3 class="text-primary text-center my-3">Register Here..</h3>
+        <div class="mb-3">
+            <!-- acc no -->
+          <label for="exampleInputAccount1" class="form-label">Account Number</label>
+          <input name="accno" formControlName="accno" type="email" class="form-control" id="exampleInputAccount1" aria-describedby="emailHelp">
+          <div *ngIf="this.registerForm.get('accno')?.errors&&this.registerForm.get('accno')?.touched" class="text-danger">*Invalid Account Number</div>
+        </div>
+        <!-- username -->
+        <div class="mb-3">
+            <label for="exampleInputUser1" class="form-label">User Name</label>
+            <input name="username" formControlName="username" type="email" class="form-control" id="exampleInputUser1" aria-describedby="emailHelp">
+            <div *ngIf="this.registerForm.get('username')?.errors&&this.registerForm.get('username')?.touched" class="text-danger">*Invalid User Name</div>
+        </div>
+          <!-- password -->
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input naem="password" formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
+          <div *ngIf="this.registerForm.get('password')?.errors&&this.registerForm.get('password')?.touched" class="text-danger">*Invalid Password</div>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <!-- button -->
+        <div class="text-center">
+        <h3 class="text-center text-danger">{{RegisterError}}</h3>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <p class="mt-3">Already have an Account? <a routerLink=""> Please Login </a></p>
+        </div>    
+    </form>
+    </div>
+    </div>
+  </div>
+
+
+
+  <!-- footer -->
+  <footer class="bg-info text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright:
+      <a class="text-dark">westcoastbanking.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

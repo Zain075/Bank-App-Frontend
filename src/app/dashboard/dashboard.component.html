@@ -1,0 +1,147 @@
+<app-delete-accno [deleteAccno]="accno" (onCancel)="cancelDeleteConfirm()" (onDelete)="deleteFromParent()"></app-delete-accno>
+
+<div *ngIf="deleteSuccessMsg">
+  <h1 class="text-center text-success">{{deleteSuccessMsg}}</h1>
+</div>
+
+<div *ngIf="!deleteConfirmStatus">
+<!-- nav bar -->
+<nav class="navbar navbar-expand-md bg-info">
+    <div class="container-fluid">
+        <a class="navbar-brand" >
+            <img width="50px" height="50px" src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-currency-exchange-money-icon-design-for-web-png-image_5225655.jpg" alt="">
+            WEST COAST BANK
+            </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto me-5">
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Services
+            </a>
+            <ul class="dropdown-menu">
+              <li><a  (click)="getBalance()" class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasExample"><i class="fa-regular fa-money-bill-1 me-2"></i>Balance Enquiry</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-money-bill-transfer me-2"></i>Fund Transfer</a></li>
+              <li><a routerLink="/transaction" class="dropdown-item" ><i class="fa-solid fa-note-sticky me-2"></i>Transaction History</a></li>
+              <li><a (click)="deleteAccount()" class="dropdown-item" ><i class="fa-solid fa-trash me-2" ></i>Remove Account</a></li>
+              <li><a (click)="logout()" class="dropdown-item" ><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- modal -->
+<!-- fund transfer -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form [formGroup]="FundTransferFrom" >
+        <div class="form-floating mb-3">
+          <input formControlName="creditAcno" name="creditAcno" type="text" class="form-control" id="floatingInput" placeholder="Account Number">
+          <label for="floatingInput">Credit Account Number</label>
+          <div *ngIf="this.FundTransferFrom.get('creditAcno')?.errors&&this.FundTransferFrom.get('creditAcno')?.touched" class="text-danger">*Invalid account name</div>
+        </div>
+        <div class="form-floating mb-3">
+          <input formControlName="amount" name="amount" type="text" class="form-control" id="floatingInput" placeholder="Transfer Amount">
+          <label for="floatingInput">Transfer Amount</label>
+          <div *ngIf="this.FundTransferFrom.get('amount')?.errors&&this.FundTransferFrom.get('amount')?.touched" class="text-danger">*Invalid amount</div>
+        </div>
+        <div class="form-floating">
+          <input formControlName="password" name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+          <div *ngIf="this.FundTransferFrom.get('password')?.errors&&this.FundTransferFrom.get('password')?.touched" class="text-danger">*Invalid Password</div>
+        <!-- result -->
+          <div class="text-success fw-bolder text-center mx-2">
+            {{transferSuccess}}
+        </div>
+        <div class="text-danger fw-bolder text-center mx-2">
+          {{transferError}}
+      </div>
+        </div>
+        <div class="text-center my-2 d-flex justify-content-evenly">
+        <button  (click)="reset()" type="button" class="btn btn-danger mt-2">Reset</button>
+        <button  (click)="dashboardForm()" type="button" class="btn btn-success mt-2">Transfer</button>
+        <button  (click)="close()"  data-bs-dismiss="modal" type="button" class="btn btn-primary mt-2">Close</button>
+      </div>
+      </form>
+      </div>
+      
+
+      
+      
+
+    </div>
+  </div>
+</div>
+
+
+<!-- offcanvas -->
+<!-- balance Enquiry -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Account Balance</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <img height="300px" width="100%" src="https://i.pinimg.com/originals/63/89/fa/6389fa22ed7653c40570c98b03764afc.gif" alt="">
+
+    <div>
+      <h1>Hey {{user}}</h1>
+      <h3>Your current balance is : <span class="text-success">{{balance}}</span></h3>
+    </div>
+    
+  </div>
+</div>
+
+  <!-- main content -->
+  <div class="container">
+    <div class="row">
+        <!-- image --> 
+        <div class="col-6 mt-5">
+            <img width="100%" class="mt-5 rounded-4" src="https://i.pinimg.com/originals/5b/ad/f7/5badf72a895a0a9d6ff371ef364d56af.gif" alt="">
+        </div>
+        <!-- heading and texts -->
+        <div class="col-6 p-5 mt-5">
+            <h1>Welcome {{user}}</h1>
+            <p style="text-align: justify">Online banking allows you to conduct financial transactions via the Internet. Online banking is also known as Internet banking or web banking. Online banking offers customers almost every service traditionally available through a local branch including deposits, transfers, and online bill payments.</p>
+            <div class="collapse" id="collapseExample">
+                
+                  Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                
+              </div>
+            <button (click)="collapse()" class="btn btn-primary " data-bs-toggle="collapse" data-bs-target="#collapseExample">Read 
+                <span *ngIf="!isCollapse">More</span>
+                <span *ngIf="isCollapse">Less</span>
+            </button>
+            
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+   <!-- footer -->
+   <footer class="mt-5 bg-info text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright:
+      <a class="text-dark">westcoastbanking.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  </div>

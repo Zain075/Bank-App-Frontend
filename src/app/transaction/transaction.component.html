@@ -1,0 +1,62 @@
+
+<!-- navbar -->
+<nav class="navbar bg-info">
+    <div class="container">
+      <a class="navbar-brand" >
+      <img width="50px" height="50px" src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-currency-exchange-money-icon-design-for-web-png-image_5225655.jpg" alt="">
+      WEST COAST BANK
+      </a>
+    </div>
+  </nav>
+
+<!-- main content -->
+<div class="container">
+    <div class="row">
+        <h2 class="text-dark text-center my-4">Transaction History</h2>
+        <div class="col-6 mt-3">
+
+            <input type="text" placeholder="Search By Type" class="mb-5">
+        </div>
+        <div class="col-6 mt-3">
+            <button style="float: right;" (click)="generatePdf()" class="btn btn-primary">Export as Pdf</button>
+        </div>
+    </div>
+
+    <div class="row-table">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Type</th>
+                <th scope="col">From Account</th>
+                <th scope="col">To Account</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-active" *ngFor="let trans of transactions ; let i=index" >
+                <th scope="row">{{i+1}}</th>
+                <td>{{trans.type}}</td>
+                <td>{{trans.fromAccno}}</td>
+                <td>{{trans.toAccno}}</td>
+                <td>{{trans.amount}}</td>
+              </tr>
+             
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+
+
+
+    <!-- footer -->
+    <footer class="mt-5 bg-info text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2023 Copyright:
+          <a class="text-dark">westcoastbanking.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
